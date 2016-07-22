@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    
+	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+	<title>The Flower Store - Checkout</title>
+    
+</head>
+<body>
+	<header class="cd-main-header">
+		<div class="img-responsive"><img src="img/logo.png" /></div>
+	</header>
+    <div class="container">
+	<div class='col-md-8 col-sm-12 form-horizontal'> 
+        <div class="table-responsive">
+            <table width='100%' class="table table-condensed responstable">
+                <thead>
+                    <tr >
+                        <th width='25%'><b>Category</b></th>
+                        <th width='25%'><b>Product</b></th>
+                        <th class='price' width='15%'><b>Price</b></th>
+                        <th class='quantity' width='10%'><b>Quantity</b></th>
+                        <th class='price' width='15%'><b>Subtotal</b></th>
+                        <th width='10%'> </th>
+                    </tr>
+                </thead>
+                <tbody data-bind='foreach: lines'>
+                    <tr>
+                        <td>
+                            <select data-bind='options: sampleProductCategories, optionsText: "name", optionsCaption: "Select...", value: category' class="form-control"> </select>
+                        </td>
+                        <td data-bind="with: category">
+                            <select data-bind='options: products, optionsText: "name", optionsCaption: "Select...", value: $parent.product' class="form-control"> </select>
+                        </td>
+                        <td class='price' data-bind='with: product'>
+                            <span data-bind='text: formatCurrency(price)'> </span>
+                        </td>
+                        <td class='quantity'>
+                            <input data-bind='visible: product, value: quantity, valueUpdate: "afterkeydown"' class="form-control" />
+                        </td>
+                        <td class='price'>
+                            <span data-bind='visible: product, text: formatCurrency(subtotal())' > </span>
+                        </td>
+                        <td>
+                            <a href='#' data-bind='click: $parent.removeLine'>Remove</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <p class='grandTotal'>
+        Total value: <span data-bind='text: formatCurrency(grandTotal())'> </span>
+    </p>
+    <footer class="cd-pricing-footer">
+        <button data-bind='click: addLine'>Add product</button>
+        <!--<button data-bind='click: save'>Submit order</button>-->
+    </footer>
+</div>
+<div class="col-md-4 col-sm-12">
+	<ul class="cd-pricing">
+		<li>
+			<header class="cd-pricing-header">
+				<h2>Place Order</h2>
+                <h5>As Guest</h5>
+			</header> <!-- .cd-pricing-header -->
+
+			<div class="cd-pricing-features">
+				<ul>
+					<li class='grandTotal'>
+                    	<em>
+                        	<h1>Total:</h1>
+                            <span data-bind='text: formatCurrency(grandTotal())'></span>
+                    	</em>
+                    </li>				
+                </ul>
+                <div>
+					<input type="hidden" id="email" name="email"  placeholder="Enter Email" class="form-control" />
+				</div>
+			</div> <!-- .cd-pricing-features -->
+
+			<footer class="cd-pricing-footer">
+				<a href="#0" >Checkout</a>
+			</footer> <!-- .cd-pricing-footer -->
+		</li>
+	</ul> <!-- .cd-pricing -->
+</div>
+	<div class="cd-form form-horizontal">
+		<div class="cd-plan-info">
+			<!-- content will be loaded using jQuery - according to the selected plan -->
+		</div>
+		<div class="cd-more-info">
+			<h3>Need help?</h4>
+			<p>Please contact our Land line contact number or email us at support@theflowerstore.ae</p>
+		</div>
+		
+		<form action="">
+			<fieldset>
+				<legend>Proceed To Payment</legend>
+				<p class="text_color">Your Information</p>	
+				<div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <input type="text" id="userName" name="userName" placeholder="Full Name" class="form-control" />
+                    </div>
+                   
+                    <div class="col-md-6 col-xs-12">
+                        <input type="text" id="email" name="email" placeholder="Email" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="col-md-6 col-xs-12">
+                        <select id="country" name="country" class="form-control" >
+                            <option value="">Country</option>
+                            <option value="United Arab Emirates">+971 United Arab Emirates</option>
+                            <option value="United Kingdom">+44 United Kingdom</option>
+                            <option value="Australia">+61 Australia</option>
+                            <option value="United States">+1 United States</option>
+                            <option value="Afghanistan">+93 Afghanistan</option>
+                            <option value="Albania">+355 Albania</option>
+                            <option value="Algeria">+213 Algeria</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <input type="number" id="number" name="number" class="form-control"   placeholder="Number" />
+                    </div>
+                </div>
+			</fieldset>
+			<fieldset>
+				<p class="text_color">Delivery Address</p>	
+				<div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <input type="text" id="recipent_name" name="recipent_name" placeholder="Recipent Name" class="form-control" />
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <input type="number" id="number" name="number" placeholder="Recipent Number" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <select id="location" name="location" class="form-control" >
+                            <option value="">Select Location Type</option>
+                            <option value="Office" >Office</option>
+                            <option value="Home" >Home</option>
+                            <option value="Hospital" >Hospital</option>
+                            <option value="School" >School</option>
+                            <option value="Others" >Others</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                    <select id="Relationship" name="Relationship" class="form-control" >
+                    	<option value="">Select Relationship</option>
+                        <option value="Wife" >Wife</option>
+                        <option value="Husband" >Husband</option>
+                        <option value="Brother" >Brother</option>
+                        <option value="Sister" >Sister</option>
+                        <option value="Myself" >Myself</option>
+                        <option value="Business Colleague" >Business Colleague</option>
+                        <option value="Friend" >Friend</option>
+                        <option value="Boyfriend" >Boyfriend</option>
+                        <option value="Girlfriend" >Girlfriend</option>
+                        <option value="Father" >Father</option>
+                        <option value="Mother" >Mother</option>
+                        <option value="Other" >Other</option>
+                    </select>
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                         <input type="text" id="recipent_address" name="recipent_address" placeholder="Recipent Address" class="form-control" />
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                     <input type="text" id="country_name" name="country_name" placeholder="UAE" readonly class="form-control" />
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                    <select id="city_name" name="city_name" class="form-control" >	  
+                          <option value="">Select City</option>
+                          <option value="1">Abu Dhabi</option>
+                          <option value="2">Ajman</option>
+                          <option value="3">Al Ain</option>
+                          <option value="4">Al Fujairah</option>
+                          <option value="5">Dubai</option>
+                          <option value="6">Ras al Khaimah</option>
+                          <option value="7">Sharjah</option>
+                          <option value="8">Umm al Quwain</option>
+                     </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                         <input type="date" id="delivery_date" name="delivery_date" placeholder="Delivery Date" class="form-control" />
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                    	<input type="text" id="time_slot" name="time_slot" placeholder="Time Slot" class="form-control" />
+                    </div>
+                   
+                </div>
+                <p class="text_color">Special Message</p>
+                  
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <select id="ocassion" name="ocassion" class="form-control">
+                            <option value="">Select Occasion</option>
+                            <option value="Birthday">Birthday</option>    
+                            <option value="Anniversary">Anniversary</option>    
+                            <option value="Thinking of You">Thinking of You</option>    
+                            <option value="Love and Romance">Love and Romance</option>    
+                            <option value="Thank You">Thank You</option>    
+                            <option value="New Baby">New Baby</option>    
+                            <option value="Get Well">Get Well</option>    
+                            <option value="Sympathy">Sympathy</option>    
+                            <option value="I'm Sorry Flowers">I'm Sorry Flowers</option>    
+                            <option value="Congratulations" selected="selected">Congratulations</option>    
+                            <option value="Just Because">Just Because</option>    
+                            <option value="Corporate Gifts">Corporate Gifts</option>    
+                            <option value="Easter">Easter</option>    
+                            <option value="Other">Other</option>    
+                       </select>
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <textarea class="form-control" placeholder="Gift Message..."></textarea>
+                    </div>
+                </div>
+               
+			</fieldset>
+            
+			<fieldset>
+				<legend>Select Payment Method</legend>
+				    <div>
+                        <ul class="cd-payment-gateways">
+                            <li>
+                                <input type="radio" name="payment-method" id="paypal" value="paypal" />
+                                <label for="paypal">Paypal</label>
+                            </li>
+                            
+                            <li>
+                                <input type="radio" name="payment-method" id="card" value="card" checked />
+                                <label for="card">Card</label>
+                            </li>
+                        </ul> <!-- .cd-payment-gateways -->
+                    </div>
+                    <div class="row card">
+                        <div class="col-md-4 col-xs-12">
+                            <input type="text" id="cardNumber" name="cardNumber" placeholder="Card Number" class="form-control" />
+                        </div>
+                        <div class="col-md-3 col-xs-12">
+                            <select name="card-expiry-month" id="card-expiry-month" class="form-control">
+                                <option value="">Exp Month</option>
+                                <option value="1">1</option>
+                                <option value="1">2</option>
+                                <option value="1">3</option>
+                                <option value="1">4</option>
+                                <option value="1">5</option>
+                                <option value="1">6</option>
+                                <option value="1">7</option>
+                                <option value="1">8</option>
+                                <option value="1">9</option>
+                                <option value="1">10</option>
+                                <option value="1">11</option>
+                                <option value="1">12</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 col-xs-12">	
+                            <select name="card-expiry-year" id="card-expiry-year" class="form-control">
+                                <option value="2015">2015</option>
+                                <option value="2015">2016</option>
+                                <option value="2015">2017</option>
+                                <option value="2015">2018</option>
+                                <option value="2015">2019</option>
+                                <option value="2015">2020</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-xs-12">
+                            <input type="text" id="cardCvc" name="cardCvc" placeholder="CVC" class="form-control">
+                        </div>
+                    </div>
+				</div> <!-- .cd-credit-card -->
+			</fieldset>
+		</form>
+		<a href="#0" class="cd-close"></a>
+		</div> <!-- .cd-form -->
+	<div class="cd-overlay"></div> <!-- shadow layer -->
+</div><!--Container End-->  
+<!--Scripts Start-->  
+<script src="js/jquery-2.1.4.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="js/velocity.min.js"></script>
+<script src="js/main.js"></script> <!-- Resource jQuery -->
+<script src="js/knockout-3.4.0.js"></script>
+<script src="js/sampleProductCategories.js"></script>
+
+<script>
+function formatCurrency(value) {
+    return "$" + value.toFixed(2);
+}
+ 
+var CartLine = function() {
+    var self = this;
+    self.category = ko.observable();
+    self.product = ko.observable();
+    self.quantity = ko.observable(1);
+    self.subtotal = ko.computed(function() {
+        return self.product() ? self.product().price * parseInt("0" + self.quantity(), 10) : 0;
+    });
+ 
+    // Whenever the category changes, reset the product selection
+    self.category.subscribe(function() {
+        self.product(undefined);
+    });
+};
+ 
+var Cart = function() {
+    // Stores an array of lines, and from these, can work out the grandTotal
+    var self = this;
+    self.lines = ko.observableArray([new CartLine()]); // Put one line in by default
+    self.grandTotal = ko.computed(function() {
+        var total = 0;
+        $.each(self.lines(), function() { total += this.subtotal() })
+        return total;
+    });
+ 
+    // Operations
+    self.addLine = function() { self.lines.push(new CartLine()) };
+    self.removeLine = function(line) { self.lines.remove(line) };
+    self.save = function() {
+        var dataToSave = $.map(self.lines(), function(line) {
+            return line.product() ? {
+                productName: line.product().name,
+                quantity: line.quantity()
+            } : undefined
+        });
+        alert("Could now send this to server: " + JSON.stringify(dataToSave));
+    };
+};
+ 
+ko.applyBindings(new Cart());
+</script>
+
+</body>
+</html>
