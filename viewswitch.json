@@ -1,0 +1,61 @@
+{
+	"app": {
+		"_abstract": true,
+		"_template": "layout.html",
+		"_resolve": {
+			"GetAccountQuery": {
+				"path": "/xyz"
+			}
+		},
+		"_controller": "appController"
+		},
+		"root":{
+			"_controller": "rootController",
+			"_url": "/",
+			"_resolve":{
+			},
+			"_views": {
+				"header": {
+					"_template": "header.html"
+				},
+				"nav": {
+					"panels": {
+						"topMenu": {
+							"panelType": "menuPanel",
+							"data": [{	
+										"menu1": "Menu1",
+									 	"menu2": "Menu2",
+										"menu3": "Menu3"
+									 }],
+							"targetContainer": "Content"
+						}
+					}
+				},
+				"content":{
+					"panels": {
+						"SearchForm1": {
+							"panelType": "FormPanel"
+						},
+						"CustomerList": {
+							"panelType": "ListPanel"
+						}
+					}
+				}
+			}
+		},
+		"menu1":{
+			"_resolve":{
+				"menuPanel": {"submenu1":"subMenu1"}
+			}				
+		},
+		"menu2":{
+			"_resolve":{
+				"menuPanel": {"submenu2":"subMenu2"}
+			}				
+		},
+		"menu3":{
+			"_resolve":{
+				"menuPanel": {"submenu3":"subMenu3"}
+			}				
+		}
+	}
